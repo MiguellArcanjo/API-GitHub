@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Selector, Clear } from './styles';
 
 function Filter() {
     const langs = [
@@ -7,12 +8,20 @@ function Filter() {
         {name: 'PHP', count: 1, color: '#3498db'},
     ]
 
+    const selectors = langs.map(({name, count, color}) => (
+        <Selector key={name.toLowerCase()} color={color}>
+            <span>{name}</span>
+            <span>{count}</span>
+        </Selector>
+    ));
 
     return (
-        <div>
-            teste
-        </div>
+        <Container>
+            {selectors}
+            <Clear>Limpar</Clear>
+        </Container>
+        // <div>teste</div>
     );
 }
 
-export default Filter;;
+export default Filter;

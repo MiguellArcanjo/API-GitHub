@@ -48,7 +48,7 @@ export const theme = {
     sm: rem(12),
     md: rem(14),
     base: rem(16),
-    lg: rem(18),
+    large: '1.2rem',
     xl: rem(20),
     "2xl": rem(24),
     "3xl": rem(32),

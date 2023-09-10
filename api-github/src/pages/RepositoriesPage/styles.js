@@ -13,19 +13,21 @@ export const Sidebar = styled.aside`
     background: ${(props) => props.theme.colors.gray900};
     min-width: 20rem;
     max-height: 100vh;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
 `;
 
 export const Main = styled.section`
     background: ${(props) => props.theme.colors.container};
     width: 100%;
-    flex: 1;
+    /* flex: 1; */
     height: 100vh;
     overflow-y: hidden;
     padding: 40px;
 
     @media screen and (max-width: ${(props) => props.theme.breakpoints.md}) {
         height: 100%;
+        width: 90%;
+
     }
 
     @media screen and (max-width: ${(props) => props.theme.breakpoints.sm}) {
