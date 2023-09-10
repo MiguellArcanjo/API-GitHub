@@ -18,7 +18,7 @@ export default function MainPage() {
           value={login} 
           onChange={(e) => setLogin(e.target.value)}
         />
-        <Button to={`/${login}/repositories`}>
+        <Button to="/repositories">
           <MdSearch size={42}/>
         </Button>
       </Form>
