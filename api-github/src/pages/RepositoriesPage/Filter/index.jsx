@@ -1,14 +1,12 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
+
 import { Container, Selector, Clear } from './styles';
 
-function Filter() {
-    const langs = [
-        {name: 'JavaScript', count: 5, color: '#f1c40f'},
-        {name: 'Shell', count: 2, color: '#95a6a6'},
-        {name: 'PHP', count: 1, color: '#3498db'},
-    ]
+function Filter({languages}) {
 
-    const selectors = langs.map(({name, count, color}) => (
+    const selectors = languages.map(({name, count, color}) => (
         <Selector key={name.toLowerCase()} color={color}>
             <span>{name}</span>
             <span>{count}</span>
@@ -23,5 +21,15 @@ function Filter() {
         // <div>teste</div>
     );
 }
+
+Filter.propTypes = {
+    languages: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            count: PropTypes.number.isRequired,
+            color: PropTypes.string,
+        }).isRequired
+    ).isRequired,
+};
 
 export default Filter;
