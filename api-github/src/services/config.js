@@ -9,8 +9,8 @@ export const langColors = {
     php: '#3498db',
     go: '#72aed8',
     ruby: '#e74c3c',
-    c: '#16a085',
-    'c#': '#27ae60',
+    c: '#12a',
+    'c#': '#12a',
     'c++': '#7f8c8d',
     java: '#fff'
 }
