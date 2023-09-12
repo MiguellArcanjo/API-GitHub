@@ -1,44 +1,50 @@
-import React, {useState} from 'react'
-import { Container, Sidebar, Main } from './styles';
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom';
+
+import { Container, Sidebar, Main , Loading} from './styles';
+
 
 import Profile from './Profile';
 import Filter from './Filter';
 import Repositories from './Repositories';
 
-import { getLangsFrom } from '../../services/api';
+import { getLangsFrom, getUser, getRepos } from '../../services/api';
 
 function RepositoriesPage() {
+  const { login } = useParams();
 
+  const [user, setUser] = useState();
+  const [repositories, setRepositories] = useState();
+  const [languages, setLanguage] = useState();
   const [currentLanguage, setCurrentLanguage] = useState();
+  const [loading, setLoading ] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const [userReponse, repositorieResponse] = await Promise.all([
+        getUser(login),
+        getRepos(login),
+      ]);
+
+      setUser(userReponse.data);
+      setRepositories(repositorieResponse.data)
+
+      setLanguage(getLangsFrom(repositorieResponse.data));
 
 
-  const user = {
-    "login": "MiguellArcanjo",
-    "name": "Miguel Arcanjo",
-    "avatar_url": "https://avatars.githubusercontent.com/u/94648769?v=4",
-    "followers": 2,
-    "following": 4,
-    "company": null,
-    "blog": null,
-    "location": null,
-  };
-
-  const repositories = [
-    {id: '1', name: 'Repo 1', description: 'Descrição', html_url: 'https://google.com', language: 'JavaScript'},
-    {id: '2', name: 'Repo 2', description: 'Descrição', html_url: 'https://google.com', language: 'JavaScript'},
-    {id: '3', name: 'Repo 3', description: 'Descrição', html_url: 'https://google.com', language: 'PHP'},
-    {id: '4', name: 'Repo 4', description: 'Descrição', html_url: 'https://google.com', language: 'Java'},
-    {id: '5', name: 'Repo 5', description: 'Descrição', html_url: 'https://google.com', language: 'Python'},
-    {id: '6', name: 'Repo 6', description: 'Descrição', html_url: 'https://google.com', language: 'C#'},
-    {id: '7', name: 'Repo 7', description: 'Descrição', html_url: 'https://google.com', language: 'Ruby'},
-  ];
+      setLoading(false);
+    }
+    loadData();
+  }, []);
 
   
-  const languages = getLangsFrom(repositories)
-
   const onFilterClick = (language) => {
     setCurrentLanguage(language);
   };
+
+  if(loading) {
+    return <Loading>Carregando...</Loading>;
+  }
 
   return (
     <Container >
